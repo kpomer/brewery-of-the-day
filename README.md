@@ -10,7 +10,7 @@
 - [x] Call the brewery DB once with each seed_value
   - https://api.openbrewerydb.org/v1/breweries?page={seed_value}&per_page=1
 
-- [ ] Store the results in the private Gist
+- [x] Store the results in the Github Gist
 
 ## Next Steps:
 

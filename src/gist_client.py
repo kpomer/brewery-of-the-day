@@ -1,7 +1,6 @@
 import os
 from dotenv import load_dotenv
 import requests
-import json
 
 # --- CONFIGURATION (from .env) ---
 load_dotenv()

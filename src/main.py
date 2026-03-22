@@ -30,8 +30,6 @@ def main(dateString):
     gist_client.updateGistData(breweriesOfTheDay)
 
 
-
-
 if __name__ == "__main__":
     if len(sys.argv) == 2:
         date_input = sys.argv[1]
