@@ -3,6 +3,7 @@ import random
 import json
 import datetime
 import api_client
+import gist_client
 
 
 def main(dateString):
@@ -24,9 +25,9 @@ def main(dateString):
         breweries_dict[checkDateString] = breweryData
 
     breweriesOfTheDay = json.dumps(breweries_dict, indent=2)
-    print(breweriesOfTheDay)
 
-    #TODO Set Gist data
+    # Set data in Github Gist
+    gist_client.updateGistData(breweriesOfTheDay)
 
 
 
