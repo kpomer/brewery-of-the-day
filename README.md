@@ -14,6 +14,8 @@
 
 ## Next Steps:
 
+- [ ] Add more robust handling for http requests. These should use a try/catch to handle possible timeouts or other errors. If something is failing, notify myself via email or ntfy notification to fix the data. Note - Gist can be manually updated if necessary
+
 - [ ] Setup cron job as Github actions to refresh this data every 24hrs
 
 - [ ] Setup TRMNL plug-in to retrieve this data from the Gist based on the current day
