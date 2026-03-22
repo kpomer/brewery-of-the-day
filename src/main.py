@@ -1,14 +1,39 @@
-# TODO Add following functionality:
-# Call brewery DB metadata API to gather full count of breweries
-#       https://api.openbrewerydb.org/v1/breweries/meta
+import sys
+import random
+import json
+import datetime
+import api_client
 
-# Use rundate [-1, 0, +1] as seed for random number between 1 and total breweries
 
-# Call the brewery DB once with each seed_value
-#       https://api.openbrewerydb.org/v1/breweries?page={seed_value}&per_page=1
+def main(dateString):
+    
+    inputDate = datetime.datetime.strptime(dateString, "%Y-%m-%d")
 
-# Store the results in the private Gist
+    # Gather total count of breweries
+    breweryTotalCount = api_client.getBreweryCount()
 
-# TODO Next Steps:
-# Setup cron job as Github actions to refresh this data every 24hrs
-# Setup TRMNL plug-in to retrieve this data based on the current day
+    breweries_dict = {}
+    dateOffset = [-1,0,1] # used to gather data from before/on/after input date (for handling timezones)
+    for offset in dateOffset:
+        checkDate = inputDate + datetime.timedelta(days=offset)
+
+        checkDateString = checkDate.strftime("%Y-%m-%d")
+        random.seed(checkDateString) # "random" breweryIndex is deterministic based on date seed
+        breweryIndex = random.randint(1, breweryTotalCount)
+        breweryData = api_client.getBreweryData(breweryIndex)
+        breweries_dict[checkDateString] = breweryData
+
+    breweriesOfTheDay = json.dumps(breweries_dict, indent=2)
+    print(breweriesOfTheDay)
+
+    #TODO Set Gist data
+
+
+
+
+if __name__ == "__main__":
+    if len(sys.argv) == 2:
+        date_input = sys.argv[1]
+        main(date_input)
+    else:
+        print("Missing date argument!")
