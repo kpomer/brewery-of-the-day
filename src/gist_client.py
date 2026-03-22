@@ -25,4 +25,3 @@ def updateGistData(jsonData):
     }
     rsp = requests.patch(url=URL, json=payload, headers=headers)
     #TODO Handle errors
-    print(rsp.status_code)
