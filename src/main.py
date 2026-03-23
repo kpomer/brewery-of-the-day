@@ -19,6 +19,7 @@ def main(dateString):
 
         random.seed(checkDateString) # "random" breweryIndex is deterministic based on checkDateString seed value
         breweryIndex = random.randint(1, breweryTotalCount)
+        print(f"Retrieving Brewery Data for Index {breweryIndex}...")
         breweryData = api_client.getBreweryData(breweryIndex)
         breweries_dict[checkDateString] = breweryData
 
@@ -27,7 +28,7 @@ def main(dateString):
     # Publish Data to Github Gist
     gistDescription = f"Brewery Data - Updated {datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}"
     gist_client.updateGistData(gistDescription, breweriesOfTheDay)
-    print(f"Brewery Data has been updated with {len(breweries_dict)} entries")
+    print(f"Brewery Data has been updated with {len(breweries_dict)} entries!")
 
 
 if __name__ == "__main__":
