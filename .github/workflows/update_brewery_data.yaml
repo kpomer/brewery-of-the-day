@@ -1,0 +1,35 @@
+name: Update Brewery Data
+
+on:
+  #   schedule:
+  #     # Runs at 04:00 UTC every Tuesday
+  #     - cron: "0 4 * * 2"
+  workflow_dispatch:
+
+jobs:
+  update-gist:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: "pip"
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run Update Script
+        env:
+          # Retrieve Github Secrets
+          GIST_ID: ${{ secrets.GIST_ID }}
+          GIST_TOKEN: ${{ secrets.GIST_TOKEN }}
+        run: |
+          python src/main.py
+          echo "### 🍺 Brewery Update Successful" >> $GITHUB_STEP_SUMMARY
