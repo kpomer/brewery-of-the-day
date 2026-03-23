@@ -19,3 +19,10 @@
 - [ ] Setup cron job as Github actions to refresh this data every 24hrs
 
 - [ ] Setup TRMNL plug-in to retrieve this data from the Gist based on the current day
+
+<hr>
+
+## Data Source
+
+This project uses the [Open Brewery DB](https://www.openbrewerydb.org/) API to fetch brewery information.
+Special thanks to the maintainers for providing this data for free!
