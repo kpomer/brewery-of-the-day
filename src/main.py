@@ -8,11 +8,11 @@ import gist_client
 def main(dateString):
     
     inputDate = datetime.datetime.strptime(dateString, '%Y-%m-%d') # Reference Date for Data Retrieval
-    breweryTotalCount = api_client.getBreweryCount() # Total count of breweries in DB
     print(f"Updating Breweries based on reference date: {dateString}")
 
     breweries_dict = {}
     # Retrieve brewery data for dates around inputDate (including several days before/after to avoid daily updates and handle all timezones)
+    breweryTotalCount = api_client.getBreweryCount() # Total count of breweries in DB
     for offset in range(-2, 10):
         checkDate = inputDate + datetime.timedelta(days=offset)
         checkDateString = checkDate.strftime('%Y-%m-%d')
@@ -28,7 +28,6 @@ def main(dateString):
     # Publish Data to Github Gist
     gistDescription = f"Brewery Data - Updated {datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}"
     gist_client.updateGistData(gistDescription, breweriesOfTheDay)
-    print(f"Brewery Data has been updated with {len(breweries_dict)} entries!")
 
 
 if __name__ == "__main__":
@@ -42,4 +41,9 @@ if __name__ == "__main__":
     else:
         print(f"Invalid Number of Arguments: {len(sys.argv)}")
     
-    main(date_input)
+    try:
+        main(date_input)
+        print(f"Brewery Data has been updated!")
+    except Exception as e:
+        print(e)
+        sys.exit(1)
