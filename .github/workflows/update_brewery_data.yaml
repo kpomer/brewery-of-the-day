@@ -1,13 +1,14 @@
-name: Update Brewery Data
+name: Refresh Brewery Data
 
 on:
-  #   schedule:
-  #     # Runs at 04:00 UTC every Tuesday
-  #     - cron: "0 4 * * 2"
+  schedule:
+    # Runs at 04:00 UTC every Wednesday
+    - cron: "0 4 * * 3"
   workflow_dispatch:
 
 jobs:
-  update-gist:
+  refresh-brewery-data:
+    name: Refresh Brewery Data
     runs-on: ubuntu-latest
 
     steps:
@@ -32,4 +33,4 @@ jobs:
           GIST_TOKEN: ${{ secrets.GIST_TOKEN }}
         run: |
           python src/main.py
-          echo "### 🍺 Brewery Update Successful" >> $GITHUB_STEP_SUMMARY
+          echo "### 🍺 Brewery Data Updated Successfully" >> $GITHUB_STEP_SUMMARY

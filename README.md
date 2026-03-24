@@ -12,13 +12,15 @@
 
 - [x] Store the results in the Github Gist
 
+- [x] Setup cron job as Github actions to refresh this data every X days (likely once per week)
+
+- [x] Setup basic TRMNL plug-in to retrieve this data from the Gist based on the current day
+
 ## Next Steps:
 
 - [ ] Add more robust handling for http requests. These should use a try/catch to handle possible timeouts or other errors. If something is failing, notify myself via email or ntfy notification to fix the data. Note - Gist can be manually updated if necessary
 
-- [ ] Setup cron job as Github actions to refresh this data every X days (likely once per week)
-
-- [ ] Setup TRMNL plug-in to retrieve this data from the Gist based on the current day
+- [ ] Improve TRMNL plug-in to create a clean layout instead of just listing all the data points
 
 <hr>
 
